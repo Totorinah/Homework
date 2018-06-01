@@ -11,6 +11,8 @@ public class Player {
     private Random random;
     public double angle = 0.0;
     private PolygonRenderer renderer;
+    private PlayerShoot playerShoot;
+
 
     public Player() {
         this.position = new Vector2D();
@@ -22,12 +24,17 @@ public class Player {
                 new Vector2D(0, 16),
                 new Vector2D(20, 8)
         );
+        this.playerShoot = new PlayerShoot();
+
     }
 
     public void run() {
         this.position.addUp(this.velocity);
         this.renderer.angle = this.angle;
         this.backToScreen();
+        this.playerShoot.run(this);
+        this.playerShoot.bulletsPlayer.forEach(bulletPlayer -> bulletPlayer.run());
+
     }
 
     private void backToScreen() {
@@ -47,5 +54,6 @@ public class Player {
 
     public void render(Graphics graphics) {
         this.renderer.render(graphics, this.position);
+        this.playerShoot.bulletsPlayer.forEach(bulletPlayer -> bulletPlayer.render(graphics));
     }
 }

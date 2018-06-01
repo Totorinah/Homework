@@ -45,11 +45,19 @@ public class GameWindow extends JFrame {
 
                 Vector2D rotate = (new Vector2D(3.5f, 0)).rotate(gameCanvas.player.angle);
                 gameCanvas.player.velocity.set(rotate);
+                
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+                    gameCanvas.player.velocity.multiply(2);
+                }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+            	if(e.getKeyCode()==KeyEvent.VK_UP){
+                    Vector2D rotate = (new Vector2D(4,0)).rotate(gameCanvas.player.angle);
+                    gameCanvas.player.velocity.set(rotate);
 
+                }
             }
         });
     }
